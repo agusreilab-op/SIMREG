@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[SIMREG] - Sistem Informasi Registrasi Medis</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
+
+  <!-- ======================================================== -->
+  <!-- 1. NAVBAR & MENU LOGIN (Paling Penting)                  -->
+  <!-- ======================================================== -->
+  <header class="sticky top-0 z-30 bg-slate-900/90 border-b border-slate-800 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Sisi Kiri: Logo & Nama Aplikasi -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white flex items-center justify-center font-mono font-black text-2xl shadow-lg shadow-blue-600/30">
+          +
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-base sm:text-lg font-bold text-white tracking-tight font-mono">[SIMREG]</span>
+            <span class="hidden sm:inline-block text-[11px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-semibold">
+              K3 & Okupasi
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 font-medium">Sistem Informasi Registrasi Medis</p>
+        </div>
+      </div>
+
+      <!-- Sisi Kanan: Menu Pintas Masuk Sistem -->
+      <div class="flex items-center gap-3">
+        <button
+          type="button"
+          onclick="window.location.href = 'login.html'"
+          class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm rounded-xl shadow-lg shadow-blue-600/30 transition-all duration-200 cursor-pointer active:scale-95"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          <span>MASUK SISTEM / LOGIN STAF</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 2. HERO SECTION                                          -->
+  <!-- ======================================================== -->
+  <main class="flex-1 flex flex-col justify-center">
+    <section class="relative overflow-hidden py-16 sm:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+      
+      <!-- Background Ambient Glow -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[350px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+      
+      <div class="text-center max-w-4xl mx-auto space-y-6">
+        
+        <!-- Tagline / Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Gateway Terintegrasi Medical Check Up (MCU) Modern</span>
+        </div>
+
+        <!-- Judul Utama -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight">
+          Sistem Informasi Registrasi Medis Terintegrasi
+        </h1>
+
+        <!-- Deskripsi Fitur Unggulan -->
+        <p class="text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
+          Solusi digital end-to-end untuk manajemen pemeriksaan kesehatan kerja dan registrasi medis. Mendukung standardisasi serta digitalisasi rekam medis untuk pemeriksaan <span class="text-blue-400 font-semibold">Audiometri</span>, <span class="text-blue-400 font-semibold">EKG</span>, <span class="text-blue-400 font-semibold">Spirometri</span>, <span class="text-blue-400 font-semibold">Rontgen Thorax</span>, dan <span class="text-blue-400 font-semibold">USG Abdomen</span> secara akurat dan terverifikasi.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+          <button
+            type="button"
+            onclick="window.location.href = 'login.html'"
+            class="px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm sm:text-base rounded-2xl shadow-xl shadow-blue-600/30 hover:shadow-blue-600/45 transition-all duration-200 cursor-pointer active:scale-95 flex items-center gap-2"
+          >
+            <span>MASUK SISTEM / LOGIN STAF</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </button>
+          <a
+            href="/"
+            class="px-6 py-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 hover:text-white font-semibold text-sm sm:text-base rounded-2xl transition-all duration-200"
+          >
+            Buka Console Aplikasi Utama
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Fitur Unggulan Cards (5 Modul Diagnostik) -->
+      <div class="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <!-- Audiometri -->
+        <div class="p-5 bg-slate-800/80 border border-slate-700/80 rounded-2xl hover:border-cyan-500/60 transition-all hover:-translate-y-1 shadow-lg">
+          <div class="text-2xl mb-3">🎧</div>
+          <h3 class="font-bold text-white text-sm mb-1">Audiometri</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Nada murni PTA (AC & BC) standar WHO dan kalkulasi batas ambang dengar K3.
+          </p>
+        </div>
+
+        <!-- EKG -->
+        <div class="p-5 bg-slate-800/80 border border-slate-700/80 rounded-2xl hover:border-rose-500/60 transition-all hover:-translate-y-1 shadow-lg">
+          <div class="text-2xl mb-3">📈</div>
+          <h3 class="font-bold text-white text-sm mb-1">EKG 12-Lead</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Analisis ritme, interval PR, kompleks QRS, dan evaluasi iskemia miokard.
+          </p>
+        </div>
+
+        <!-- Spirometri -->
+        <div class="p-5 bg-slate-800/80 border border-slate-700/80 rounded-2xl hover:border-teal-500/60 transition-all hover:-translate-y-1 shadow-lg">
+          <div class="text-2xl mb-3">🫁</div>
+          <h3 class="font-bold text-white text-sm mb-1">Spirometri</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Kapasitas paru FVC, FEV1, rasio ventilasi standar ATS/ERS & klasifikasi obstruktif.
+          </p>
+        </div>
+
+        <!-- Rontgen -->
+        <div class="p-5 bg-slate-800/80 border border-slate-700/80 rounded-2xl hover:border-blue-500/60 transition-all hover:-translate-y-1 shadow-lg">
+          <div class="text-2xl mb-3">🩻</div>
+          <h3 class="font-bold text-white text-sm mb-1">Rontgen Thorax</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Ekspertise CTR Cor, parenkim Pulmo, sinus kostofrenikus oleh spesialis radiologi.
+          </p>
+        </div>
+
+        <!-- USG -->
+        <div class="p-5 bg-slate-800/80 border border-slate-700/80 rounded-2xl hover:border-emerald-500/60 transition-all hover:-translate-y-1 shadow-lg">
+          <div class="text-2xl mb-3">🔬</div>
+          <h3 class="font-bold text-white text-sm mb-1">USG Abdomen</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Sonografi organ dalam Hepar, Gallbladder, Pankreas, Ren dextra & sinistra.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- FOOTER                                                   -->
+  <!-- ======================================================== -->
+  <footer class="bg-slate-900 border-t border-slate-800 py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-2">
+        <span class="font-mono text-slate-400 font-bold">[SIMREG]</span>
+        <span>&bull;</span>
+        <span>Sistem Informasi Registrasi Medis Terpadu</span>
+      </div>
+      <p class="text-slate-500">
+        &copy; 2026 SIMREG Medis. Hak Cipta Dilindungi.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>

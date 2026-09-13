@@ -1,0 +1,56 @@
+[
+  {
+    "user_id": "USR-ADM-001",
+    "username": "admin.simreg",
+    "email": "admin@simreg-health.com",
+    "password_hash": "$2a$10$wT8KzQh0XyV1Y9vPZy9Mkuo4rQjWJ6m7rE0K8Y1fG7k1H2J3K4L5M",
+    "status": "active",
+    "role": {
+      "role_id": "ROLE-01",
+      "role_name": "Admin",
+      "permissions": {
+        "can_view_dashboard": true,
+        "can_register_patient": true,
+        "can_input_medical_records": true,
+        "can_manage_users": true,
+        "can_export_reports": true
+      }
+    }
+  },
+  {
+    "user_id": "USR-REC-002",
+    "username": "resep.dina",
+    "email": "dina.frontdesk@simreg-health.com",
+    "password_hash": "$2a$10$wT8KzQh0XyV1Y9vPZy9Mkuo4rQjWJ6m7rE0K8Y1fG7k1H2J3K4L5M",
+    "status": "active",
+    "role": {
+      "role_id": "ROLE-02",
+      "role_name": "Resepsionis",
+      "permissions": {
+        "can_view_dashboard": true,
+        "can_register_patient": true,
+        "can_input_medical_records": false,
+        "can_manage_users": false,
+        "can_export_reports": false
+      }
+    }
+  },
+  {
+    "user_id": "USR-DOC-003",
+    "username": "dr.budi.spok",
+    "email": "budi.santoso@simreg-health.com",
+    "password_hash": "$2a$10$wT8KzQh0XyV1Y9vPZy9Mkuo4rQjWJ6m7rE0K8Y1fG7k1H2J3K4L5M",
+    "status": "active",
+    "role": {
+      "role_id": "ROLE-03",
+      "role_name": "Dokter / Tenaga Medis",
+      "permissions": {
+        "can_view_dashboard": true,
+        "can_register_patient": false,
+        "can_input_medical_records": true,
+        "can_manage_users": false,
+        "can_export_reports": true
+      }
+    }
+  }
+]

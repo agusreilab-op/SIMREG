@@ -1,0 +1,105 @@
+{
+  "entities": {
+    "MCUPackage": {
+      "title": "MCUPackage",
+      "description": "Konfigurasi Paket MCU dan Alokasi Stiker Label",
+      "type": "object",
+      "properties": {
+        "id": { "type": "number", "description": "ID numerik unik paket" },
+        "kode": { "type": "string", "description": "Kode unik paket MCU", "maxLength": 50 },
+        "nama": { "type": "string", "description": "Nama paket MCU", "maxLength": 150 },
+        "perusahaan": { "type": "string", "description": "Nama perusahaan / instansi terkait", "maxLength": 150 },
+        "keterangan": { "type": "string", "description": "Keterangan atau rincian paket", "maxLength": 500 },
+        "labelCount": { "type": "number", "description": "Jumlah label stiker barcode" },
+        "exams": { "type": "array", "description": "Daftar kode/nama pemeriksaan dalam paket" },
+        "pemeriksaan": { "type": "array", "description": "Daftar nama pemeriksaan dalam paket" },
+        "labels": { "type": "array", "description": "Daftar konfigurasi alokasi stiker label" },
+        "updatedAt": { "type": "string", "description": "Waktu terakhir diperbarui ISO string" }
+      },
+      "required": ["kode", "nama"]
+    },
+    "Participant": {
+      "title": "Participant",
+      "description": "Data Peserta Medical Check Up (MCU)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "number", "description": "ID unik peserta" },
+        "noMcu": { "type": "string", "description": "Nomor identitas MCU peserta", "maxLength": 50 },
+        "nama": { "type": "string", "description": "Nama lengkap peserta", "maxLength": 150 },
+        "nik": { "type": "string", "description": "Nomor Induk Kependudukan (NIK)", "maxLength": 20 },
+        "perusahaan": { "type": "string", "description": "Nama perusahaan tempat bekerja", "maxLength": 150 },
+        "paket": { "type": "string", "description": "Kode atau nama paket MCU peserta", "maxLength": 50 },
+        "departemen": { "type": "string", "description": "Departemen atau divisi kerja", "maxLength": 100 },
+        "jenisKelamin": { "type": "string", "description": "Jenis kelamin L / P", "maxLength": 10 },
+        "status": { "type": "string", "description": "Status pemeriksaan peserta", "maxLength": 50 },
+        "waktuPendaftaran": { "type": "string", "description": "Waktu pendaftaran peserta", "maxLength": 50 },
+        "updatedAt": { "type": "string", "description": "Waktu terakhir diperbarui" }
+      },
+      "required": ["nama", "perusahaan", "paket"]
+    },
+    "Company": {
+      "title": "Company",
+      "description": "Data Master Perusahaan / Korporasi Peserta MCU",
+      "type": "object",
+      "properties": {
+        "id": { "type": "number", "description": "ID unik perusahaan" },
+        "kode": { "type": "string", "description": "Kode unik perusahaan", "maxLength": 50 },
+        "nama": { "type": "string", "description": "Nama resmi perusahaan", "maxLength": 150 },
+        "alamat": { "type": "string", "description": "Alamat kantor / pabrik perusahaan", "maxLength": 300 },
+        "pic": { "type": "string", "description": "Person In Charge kontak perusahaan", "maxLength": 100 },
+        "telepon": { "type": "string", "description": "Nomor telepon kontak", "maxLength": 50 }
+      },
+      "required": ["nama"]
+    },
+    "ExamSetting": {
+      "title": "ExamSetting",
+      "description": "Pengaturan master parameter pemeriksaan fisik dan laboratorium",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Identifier pengaturan" },
+        "params": { "type": "array", "description": "Array daftar parameter pemeriksaan" },
+        "updatedAt": { "type": "string", "description": "Waktu terakhir diperbarui" }
+      },
+      "required": ["id"]
+    },
+    "Doctor": {
+      "title": "Doctor",
+      "description": "Data Master Dokter Pemeriksa MCU",
+      "type": "object",
+      "properties": {
+        "id": { "type": "number", "description": "ID unik dokter" },
+        "kode": { "type": "string", "description": "Kode dokter", "maxLength": 50 },
+        "nama": { "type": "string", "description": "Nama lengkap dokter beserta gelar", "maxLength": 150 },
+        "spesialis": { "type": "string", "description": "Spesialisasi dokter", "maxLength": 100 },
+        "telp": { "type": "string", "description": "Nomor kontak telepon", "maxLength": 50 }
+      },
+      "required": ["nama"]
+    }
+  },
+  "firestore": {
+    "/packages/{packageId}": {
+      "schema": "MCUPackage",
+      "description": "Koleksi data paket MCU dan label stiker barcode"
+    },
+    "/participants/{participantId}": {
+      "schema": "Participant",
+      "description": "Koleksi peserta registrasi dan hasil MCU"
+    },
+    "/companies/{companyId}": {
+      "schema": "Company",
+      "description": "Koleksi master perusahaan rekanan MCU"
+    },
+    "/doctors/{doctorId}": {
+      "schema": "Doctor",
+      "description": "Koleksi data master dokter pemeriksa"
+    },
+    "/exam_settings/{settingId}": {
+      "schema": "ExamSetting",
+      "description": "Koleksi master parameter pemeriksaan fisik & laboratorium"
+    },
+    "/exam_results/{resultId}": {
+      "schema": "ExamSetting",
+      "description": "Koleksi hasil pemeriksaan modalitas (Lab, Fisik, Rontgen, EKG, dll) per peserta"
+    }
+  }
+}

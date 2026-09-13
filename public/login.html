@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[SIMREG] - Medical System Gateway</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center p-4 antialiased selection:bg-cyan-500 selection:text-white">
+
+  <div class="w-full max-w-md bg-slate-800/90 border border-slate-700/80 rounded-2xl p-8 shadow-2xl backdrop-blur-md">
+    
+    <!-- Branding Header -->
+    <div class="text-center mb-7">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-600 to-teal-500 text-white shadow-lg shadow-cyan-600/30 mb-4 font-mono text-2xl font-bold">
+        +
+      </div>
+      <h1 class="text-xl font-bold tracking-tight text-white font-mono">
+        [SIMREG] - Medical System Gateway
+      </h1>
+      <p class="text-xs text-slate-400 mt-1">
+        Sistem Informasi Registrasi & Pemeriksaan Medis Terpadu
+      </p>
+    </div>
+
+    <!-- Quick Demo Accounts Helper -->
+    <div class="mb-5 p-3 bg-slate-900/60 border border-slate-700 rounded-xl text-xs space-y-1 text-slate-300">
+      <div class="font-bold text-cyan-400 flex items-center justify-between">
+        <span>Kredensial Demo Cepat:</span>
+        <span class="text-[10px] text-slate-500">Klik untuk isi</span>
+      </div>
+      <div class="flex flex-wrap gap-1.5 pt-1">
+        <button type="button" onclick="fillCredential('dr.budi.spok', 'password123')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-[11px] border border-slate-600 text-teal-300 cursor-pointer">
+          Dokter (dr.budi.spok)
+        </button>
+        <button type="button" onclick="fillCredential('admin.simreg', 'password123')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-[11px] border border-slate-600 text-blue-300 cursor-pointer">
+          Admin (admin.simreg)
+        </button>
+        <button type="button" onclick="fillCredential('resep.dina', 'password123')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 rounded text-[11px] border border-slate-600 text-amber-300 cursor-pointer">
+          Resepsionis (resep.dina)
+        </button>
+      </div>
+    </div>
+
+    <!-- Alert Box -->
+    <div id="errorAlert" class="hidden mb-5 p-3.5 bg-rose-500/15 border border-rose-500/40 rounded-xl text-xs text-rose-300 flex items-start gap-2">
+      <span class="font-bold">Error:</span>
+      <span id="errorMessage">Kredensial salah</span>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="space-y-4">
+      <div>
+        <label for="username" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+          Username
+        </label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          required 
+          autocomplete="username"
+          placeholder="contoh: dr.budi.spok" 
+          class="w-full px-4 py-2.5 bg-slate-900/80 border border-slate-700 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+        />
+      </div>
+
+      <div>
+        <label for="password" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+          Password
+        </label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          required 
+          autocomplete="current-password"
+          placeholder="••••••••" 
+          class="w-full px-4 py-2.5 bg-slate-900/80 border border-slate-700 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors"
+        />
+      </div>
+
+      <!-- Pilihan Perusahaan (PT) Bertugas -->
+      <div>
+        <div class="flex items-center justify-between mb-1.5">
+          <label for="companySelect" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+            Perusahaan (PT.) Klien MCU
+          </label>
+          <span class="text-[10.5px] text-cyan-400 font-medium">Auto-filter data</span>
+        </div>
+        <div class="relative">
+          <select
+            id="companySelect"
+            name="companySelect"
+            class="w-full px-4 py-2.5 bg-slate-900/80 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors cursor-pointer appearance-none pr-10"
+          >
+            <option value="PT. PANARUB INDUSTRY" selected>PT. PANARUB INDUSTRY</option>
+            <option value="PT. MAYORA INDAH TBK">PT. MAYORA INDAH TBK</option>
+            <option value="PT. ANEKA TAMBANG (ANTAM)">PT. ANEKA TAMBANG (ANTAM)</option>
+            <option value="PT. INDOFOOD CBP SUKSES MAKMUR">PT. INDOFOOD CBP SUKSES MAKMUR</option>
+            <option value="PT. TOYOTA MOTOR MFG INDONESIA">PT. TOYOTA MOTOR MFG INDONESIA</option>
+            <option value="PT. KALBE FARMA TBK">PT. KALBE FARMA TBK</option>
+            <option value="PT. ASTRA HONDA MOTOR">PT. ASTRA HONDA MOTOR</option>
+            <option value="Semua PT / Umum">Semua PT / Umum</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pilihan Periode MCU -->
+      <div>
+        <div class="flex items-center justify-between mb-1.5">
+          <label for="periodSelect" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider">
+            Periode Pelaksanaan MCU
+          </label>
+          <span class="text-[10.5px] text-teal-400 font-medium">Jadwal Onsite</span>
+        </div>
+        <div class="relative">
+          <select
+            id="periodSelect"
+            name="periodSelect"
+            class="w-full px-4 py-2.5 bg-slate-900/80 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-colors cursor-pointer appearance-none pr-10"
+          >
+            <option value="September 2026 - Tahap 1 (Annual MCU)" selected>September 2026 - Tahap 1 (Annual MCU)</option>
+            <option value="September 2026 - Tahap 2 (Periodic MCU)">September 2026 - Tahap 2 (Periodic MCU)</option>
+            <option value="Oktober 2026 - Tahap 1">Oktober 2026 - Tahap 1</option>
+            <option value="Kuartal 3 (Q3) - Tahun 2026">Kuartal 3 (Q3) - Tahun 2026</option>
+            <option value="Kuartal 4 (Q4) - Tahun 2026">Kuartal 4 (Q4) - Tahun 2026</option>
+            <option value="MCU Khusus K3 & Bahaya Kimia 2026">MCU Khusus K3 & Bahaya Kimia 2026</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <button 
+        type="submit" 
+        id="submitBtn"
+        class="w-full mt-2 py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-cyan-600/25 transition-all cursor-pointer flex items-center justify-center gap-2"
+      >
+        <span id="btnText">Masuk ke Sistem</span>
+        <div id="btnSpinner" class="hidden w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+      </button>
+    </form>
+
+    <div class="mt-8 pt-4 border-t border-slate-700/60 text-center flex items-center justify-between text-[11px] text-slate-500 font-mono">
+      <span>SIMREG Secure Auth Engine &bull; v2.5.0</span>
+      <a href="/" class="text-cyan-400 hover:underline">Buka Aplikasi Utama &rarr;</a>
+    </div>
+  </div>
+
+  <script>
+    function fillCredential(u, p) {
+      document.getElementById('username').value = u;
+      document.getElementById('password').value = p;
+    }
+
+    const loginForm = document.getElementById('loginForm');
+    const errorAlert = document.getElementById('errorAlert');
+    const errorMessage = document.getElementById('errorMessage');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      errorAlert.classList.add('hidden');
+      submitBtn.disabled = true;
+      btnText.textContent = 'Memverifikasi...';
+      btnSpinner.classList.remove('hidden');
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      try {
+        let authSuccess = false;
+        let token = '';
+        let userData = null;
+
+        // Coba koneksi ke backend API jika aktif
+        try {
+          const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.success) {
+              authSuccess = true;
+              token = data.token;
+              userData = data.user;
+            }
+          }
+        } catch (apiErr) {
+          console.warn('API backend offline, menggunakan verifikasi lokal:', apiErr);
+        }
+
+        // Fallback autentikasi berbasis database skema jika API backend belum dijalankan
+        if (!authSuccess) {
+          const validUsers = {
+            'dr.budi.spok': {
+              user_id: 'USR-DOC-003',
+              username: 'dr. Budi Santoso, Sp.Ok',
+              email: 'budi.santoso@simreg-health.com',
+              role: {
+                role_id: 'ROLE-03',
+                role_name: 'Dokter / Tenaga Medis',
+                permissions: { can_view_dashboard: true, can_input_medical_records: true }
+              }
+            },
+            'admin.simreg': {
+              user_id: 'USR-ADM-001',
+              username: 'Administrator SIMREG',
+              email: 'admin@simreg-health.com',
+              role: {
+                role_id: 'ROLE-01',
+                role_name: 'Admin',
+                permissions: { can_view_dashboard: true, can_manage_users: true }
+              }
+            },
+            'resep.dina': {
+              user_id: 'USR-REC-002',
+              username: 'Dina - Resepsionis',
+              email: 'dina.frontdesk@simreg-health.com',
+              role: {
+                role_id: 'ROLE-02',
+                role_name: 'Resepsionis',
+                permissions: { can_register_patient: true }
+              }
+            }
+          };
+
+          if (validUsers[username] && password === 'password123') {
+            authSuccess = true;
+            userData = validUsers[username];
+            token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' + btoa(JSON.stringify(userData)) + '.signature';
+          } else {
+            throw new Error('Kredensial username atau password salah (Gunakan demo: password123)');
+          }
+        }
+
+        // Simpan Pilihan PT dan Periode MCU ke sessionStorage
+        const selectedCompany = document.getElementById('companySelect').value;
+        const selectedPeriod = document.getElementById('periodSelect').value;
+        sessionStorage.setItem('simreg_selected_pt', selectedCompany);
+        sessionStorage.setItem('simreg_selected_periode', selectedPeriod);
+
+        // Simpan JWT Token & Role ke sessionStorage
+        sessionStorage.setItem('simreg_token', token);
+        sessionStorage.setItem('simreg_jwt_token', token);
+        sessionStorage.setItem('simreg_role', JSON.stringify(userData.role));
+        sessionStorage.setItem('simreg_user_role', JSON.stringify(userData.role));
+        sessionStorage.setItem('simreg_user', JSON.stringify(userData));
+        sessionStorage.setItem('simreg_user_profile', JSON.stringify(userData));
+
+        // Redirect Flow Berdasarkan Role
+        const roleName = userData.role.role_name;
+        if (roleName === 'Admin') {
+          window.location.href = '/admin';
+        } else if (roleName === 'Resepsionis') {
+          window.location.href = '/pendaftaran';
+        } else if (roleName === 'Dokter / Tenaga Medis') {
+          window.location.href = '/dashboard-dokter.html';
+        } else {
+          window.location.href = '/';
+        }
+
+      } catch (err) {
+        errorMessage.textContent = err.message;
+        errorAlert.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = 'Masuk ke Sistem';
+        btnSpinner.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>

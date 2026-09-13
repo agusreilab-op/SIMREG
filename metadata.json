@@ -1,0 +1,10 @@
+{
+  "name": "Remix Remix Remix Remix Remix Remix Remix Remix SIMREG Medical Check Up",
+  "description": "Sistem Informasi Medical Check Up untuk registrasi peserta, konfigurasi master data, rekam medis okupasi, dan laporan hasil MCU.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
