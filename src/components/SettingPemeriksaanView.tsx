@@ -354,10 +354,10 @@ export const SettingPemeriksaanView: React.FC<SettingPemeriksaanViewProps> = ({
 
   // Package Standardization Tab States
   const [selectedCompany, setSelectedCompany] = useState(
-    companies[0]?.nama || 'PT. ADHIMIX PRECAST INDONESIA'
+    companies[0]?.nama || 'Semua Perusahaan / Rekanan'
   );
   const [selectedPackage, setSelectedPackage] = useState(
-    packageList[0]?.kode || (packages && packages[0]?.kode) || 'PAI-A'
+    packageList[0]?.kode || (packages && packages[0]?.kode) || 'PAKET-STD'
   );
 
   useEffect(() => {

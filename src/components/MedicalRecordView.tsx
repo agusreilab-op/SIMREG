@@ -126,7 +126,7 @@ export const MedicalRecordView: React.FC<MedicalRecordViewProps> = ({
 
   // Selected patient for entry
   const [selectedPatientId, setSelectedPatientId] = useState<string>(
-    attendanceList[0]?.mcuNo || 'MCU-2025-001'
+    attendanceList[0]?.mcuNo || ''
   );
 
   React.useEffect(() => {
@@ -1103,6 +1103,22 @@ export const MedicalRecordView: React.FC<MedicalRecordViewProps> = ({
   const activeMenuConfig = SUB_MENUS.find(
     (item) => item.actionKey === activeAction
   );
+
+  if (attendanceList.length === 0 || !patient) {
+    return (
+      <div className="bg-white border border-slate-200 rounded-2xl p-8 sm:p-12 text-center space-y-4 shadow-2xs">
+        <div className="w-16 h-16 mx-auto rounded-2xl bg-cyan-50 text-[#0E7490] flex items-center justify-center border border-cyan-100 shadow-xs">
+          <FileText className="w-8 h-8" />
+        </div>
+        <div className="max-w-md mx-auto">
+          <h3 className="text-lg font-extrabold text-slate-900">Belum Ada Data Peserta MCU</h3>
+          <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
+            Data peserta MCU kosong atau seluruh data dami telah dibersihkan. Silakan daftarkan peserta baru melalui modul <b>Registrasi Peserta</b> atau Impor Data Excel untuk mulai menginput rekam medis pemeriksaan.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">

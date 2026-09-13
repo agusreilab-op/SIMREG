@@ -107,11 +107,8 @@ export function getStartingMcuNumber(attendanceList: AttendanceRecord[]): number
 
 const SAMPLE_CSV_DATA = [
   'kode PT,Wilayah MCU,NIK Karyawan,nama karyawan,tgl lahir,jenis kelamin,departemen,bagian,jabatan,paket pemeriksaan,kode paket',
-  'PAN,TNG,20100900134,SITI NURHALIZA,1992-04-15,Wanita,SEWING 01,SEWING LINE B,Operator Sewing,Daftar Rontgen Lab Darah,PAN-RO',
-  'PAN,TNG,20100900135,BUDI SANTOSO,1987-11-20,Pria,MAINTENANCE,WORKSHOP ELECTRIC,Teknisi Listrik,Daftar Fisik Thorax,PAI-A',
-  'PAN,TNG,20100900136,RATNA DEWI,1995-08-10,Wanita,QUALITY CONTROL,INCOMING QC,Inspector QC,Daftar Rontgen,PAN-RO',
-  'PAN,TNG,20100900137,HENDRA WIJAYA,1990-01-25,Pria,WAREHOUSE,FINISHED GOODS,Staff Gudang,Standard Occupational,PAN-STD',
-  'PAN,TNG,20100900138,DEWI LESTARI,1994-06-30,Wanita,CUTTING,AUTO CUTTING MACHINE,Operator Cutting,Executive Complete,PAN-EXEC',
+  'KODE_PT,PUSAT,3201234567890001,NAMA KARYAWAN 1,1992-04-15,Pria,PRODUKSI,OPERATOR,Staff Lapangan,Paket Standard MCU,PAKET-STD',
+  'KODE_PT,PUSAT,3201234567890002,NAMA KARYAWAN 2,1995-08-20,Wanita,FINANCE,ACCOUNTING,Staff Keuangan,Paket Basic MCU,PAKET-BASIC',
 ].join('\n');
 
 export const MassImportSection: React.FC<MassImportSectionProps> = ({
@@ -210,13 +207,13 @@ export const MassImportSection: React.FC<MassImportSectionProps> = ({
         const jabatan = getCol(idxJabatan, cols[8] || 'Staff');
         const paketPemeriksaan = getCol(
           idxPaket,
-          cols[9] || 'Daftar, Rontgen'
+          cols[9] || 'Paket Standar MCU'
         );
-        const kodePaket = getCol(idxKodePaket, cols[10] || 'PAN-RO');
+        const kodePaket = getCol(idxKodePaket, cols[10] || 'PAKET-STD');
 
         // Otomatis Nomor Medical Record (MR) / MCU
         // Struktur: [3 Digit Inisial Perusahaan] - [Tahun] - [Nomor Urut Peserta]
-        const companyInitial = getCompanyInitial3(kodePt || 'PAN', companies);
+        const companyInitial = getCompanyInitial3(kodePt || 'UMUM', companies);
         const yearCurrent = new Date().getFullYear();
         const mcuNoAuto = `${companyInitial}-${yearCurrent}-${String(currentMcu).padStart(3, '0')}`;
         currentMcu++;
@@ -337,7 +334,7 @@ export const MassImportSection: React.FC<MassImportSectionProps> = ({
           bagian: row.bagian,
           jabatan: row.jabatan,
           nik: row.nik,
-          paket: row.kodePaket || 'PAN-RO',
+          paket: row.kodePaket || 'PAKET-STD',
           kodePaket: row.kodePaket,
           keteranganPaket: row.paketPemeriksaan,
           tglMcu: row.tglJamAuto.split(' ')[0],

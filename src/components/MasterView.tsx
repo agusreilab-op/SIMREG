@@ -81,6 +81,7 @@ import { ExaminerConfigView } from './ExaminerConfigView';
 import { PengaturanLoginAksesView } from './PengaturanLoginAksesView';
 import { SettingPemeriksaanView } from './SettingPemeriksaanView';
 import { MasterSaranMedisTable } from './MasterSaranMedisTable';
+import { purgeAllDataEverywhere } from '../utils/dummyDataPurge';
 
 interface MasterViewProps {
   companies: Company[];
@@ -547,11 +548,30 @@ export const MasterView: React.FC<MasterViewProps> = ({
 
   // Exam parameter configuration states
   const [examComp, setExamComp] = useState(companies[0]?.nama || '');
-  const [examPkg, setExamPkg] = useState('PAI-A');
+  const [examPkg, setExamPkg] = useState(packages[0]?.kode || 'ALL');
   const [examType, setExamType] = useState('Pemeriksaan Fisik');
 
   // Clinic form states
   const [clinicState, setClinicState] = useState<ClinicInfo>(clinic);
+  const [showPurgeModal, setShowPurgeModal] = useState(false);
+  const [isPurgingData, setIsPurgingData] = useState(false);
+
+  const handleConfirmPurgeAllDummyData = async () => {
+    setIsPurgingData(true);
+    try {
+      const res = await purgeAllDataEverywhere();
+      if (res.success) {
+        onNotify('Semua data dami (peserta, hasil pemeriksaan sampel, dan perusahaan dami) telah berhasil dibersihkan!');
+        setShowPurgeModal(false);
+      } else {
+        onNotify(res.message);
+      }
+    } catch (err: any) {
+      onNotify('Gagal membersihkan data: ' + (err?.message || 'Error'));
+    } finally {
+      setIsPurgingData(false);
+    }
+  };
 
   React.useEffect(() => {
     if (clinic) {
@@ -1091,19 +1111,19 @@ export const MasterView: React.FC<MasterViewProps> = ({
       id: 999,
       mcuNo: '001',
       nik: '3271018900010002',
-      nama: 'TEST PARTICIPANT THERMAL',
+      nama: 'CONTOH PESERTA MCU',
       pt:
         samplePkg?.perusahaan ||
         pkgComp ||
         companies[0]?.nama ||
-        'PT. PANARUB INDUSTRY',
-      dept: 'PRODUKSI & QC',
+        'PT. CONTOH SEHAT BERSAMA',
+      dept: 'PRODUKSI & OPERASIONAL',
       bagian: 'LINE OPERATOR',
       jabatan: 'OPERATOR',
       tglLahir: '1992-05-15',
       jk: 'Pria',
-      paket: samplePkg?.kode || pkgKode || 'PAN-RO',
-      kodePaket: samplePkg?.kode || pkgKode || 'RO',
+      paket: samplePkg?.kode || pkgKode || 'PAKET-STD',
+      kodePaket: samplePkg?.kode || pkgKode || 'STD',
       keteranganPaket: samplePkg?.keterangan || pkgKeterangan || 'Uji Cetak Printer Thermal',
       tglMcu: new Date().toISOString().split('T')[0],
       jam: '08:30:00',
@@ -1304,6 +1324,33 @@ export const MasterView: React.FC<MasterViewProps> = ({
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Card Pembersihan Data Dami & Maintenance */}
+          <div className="bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-2xl p-6 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                <h3 className="text-base font-bold text-slate-900">
+                  Pembersihan &amp; Reset Data Dami Sistem
+                </h3>
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-semibold">
+                  Sistem Bersih
+                </span>
+              </div>
+              <p className="text-xs text-slate-600 max-w-2xl leading-relaxed">
+                Hapus seluruh rekaman data dami / sampel uji coba (peserta dummy, hasil lab/rontgen/fisik sampel, dan cache lokal browser) agar sistem MCU siap digunakan dengan data riil yang bersih.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowPurgeModal(true)}
+              disabled={isPurgingData}
+              className="px-4 py-2.5 bg-red-600 hover:bg-red-700 active:bg-red-800 disabled:bg-red-300 text-white rounded-xl text-xs font-bold transition-all shadow-xs flex items-center gap-2 whitespace-nowrap cursor-pointer"
+            >
+              <Trash2 className="w-4 h-4" />
+              {isPurgingData ? 'Sedang Menghapus...' : 'Hapus Semua Data Dami'}
+            </button>
           </div>
         </div>
       )}
@@ -2046,7 +2093,7 @@ export const MasterView: React.FC<MasterViewProps> = ({
                         type="text"
                         value={pkgKode}
                         onChange={(e) => setPkgKode(e.target.value)}
-                        placeholder="Contoh: PAN-RO, PAI-A, EXEC..."
+                        placeholder="Contoh: PAKET-BASIC, PAKET-STD, EXEC..."
                         className="w-full px-3 py-2 bg-white border border-[#CBD5E1] rounded-lg text-[13px] font-bold uppercase focus:ring-2 focus:ring-cyan-500/20"
                         required
                       />
@@ -2873,15 +2920,15 @@ export const MasterView: React.FC<MasterViewProps> = ({
                         <div className="h-7 w-full max-w-[200px] bg-[repeating-linear-gradient(90deg,#000_0px,#000_1.5px,#fff_1.5px,#fff_3px,#000_3px,#000_5px,#fff_5px,#fff_6.5px,#000_6.5px,#000_7.5px)]" />
                       )}
                       <span className="text-[8px] font-mono font-bold tracking-widest text-slate-700 mt-0.5">
-                        *MCU-2025-001*
+                        *MCU-001*
                       </span>
                     </div>
 
                     {/* Footer */}
                     <div className="border-t border-slate-200 pt-0.5 flex items-center justify-between text-[8px] text-slate-600 font-bold">
-                      <span className="truncate">PAI-A: TABUNG EDTA</span>
+                      <span className="truncate">PAKET-STD: TABUNG EDTA</span>
                       {thermalConfigState.includeFooterDate && (
-                        <span>24/07/2025</span>
+                        <span>{new Date().toLocaleDateString('id-ID')}</span>
                       )}
                     </div>
                   </div>
@@ -3196,9 +3243,9 @@ export const MasterView: React.FC<MasterViewProps> = ({
                 </div>
 
                 <div className="hidden sm:block border border-slate-400 rounded-xs px-2 py-1 text-[9px] font-mono text-slate-700 shrink-0">
-                  <div>No. ID/Mcu : PAN-2025-001</div>
-                  <div>Pasien &nbsp; &nbsp; : ABDUL ROHMAN (Pria)</div>
-                  <div>Paket &nbsp; &nbsp; &nbsp;: Paket MCU Lengkap</div>
+                  <div>No. ID/Mcu : MCU-2025-001</div>
+                  <div>Pasien &nbsp; &nbsp; : CONTOH PESERTA (Pria)</div>
+                  <div>Paket &nbsp; &nbsp; &nbsp;: Paket MCU Standar</div>
                 </div>
               </div>
             </div>
@@ -3478,16 +3525,16 @@ export const MasterView: React.FC<MasterViewProps> = ({
                               id: 1,
                               mcuNo: '001',
                               nik: '3271018900010002',
-                              nama: 'TEST PARTICIPANT THERMAL',
-                              pt: 'PT. PANARUB INDUSTRY',
+                              nama: 'CONTOH PESERTA MCU',
+                              pt: 'PT. CONTOH SEHAT BERSAMA',
                               dept: 'PRODUKSI',
                               bagian: 'OPERATOR',
                               jabatan: 'OPERATOR',
                               tglLahir: '1992-05-15',
                               jk: 'Pria',
-                              paket: 'PAN-RO',
-                              kodePaket: 'RO',
-                              keteranganPaket: 'Paket MCU Rontgen',
+                              paket: 'PAKET-STD',
+                              kodePaket: 'STD',
+                              keteranganPaket: 'Paket MCU Standar',
                               tglMcu: new Date().toISOString().split('T')[0],
                               jam: '08:30:00',
                               tglInput: new Date().toISOString().split('T')[0],
@@ -3550,11 +3597,11 @@ export const MasterView: React.FC<MasterViewProps> = ({
                     </div>
                     <div className="grid grid-cols-2 gap-y-1 text-slate-600 text-[11.5px]">
                       <div>Nama Peserta:</div>
-                      <div className="font-bold text-slate-900">TEST PARTICIPANT THERMAL</div>
+                      <div className="font-bold text-slate-900">CONTOH PESERTA MCU</div>
                       <div>No. MCU & NIK:</div>
                       <div className="font-semibold text-slate-900 font-mono">#001 (3271018900010002)</div>
                       <div>Perusahaan:</div>
-                      <div className="font-semibold text-slate-900 truncate">PT. PANARUB INDUSTRY</div>
+                      <div className="font-semibold text-slate-900 truncate">PT. CONTOH SEHAT BERSAMA</div>
                     </div>
                   </div>
                 </div>
@@ -3633,6 +3680,17 @@ export const MasterView: React.FC<MasterViewProps> = ({
         }
         onClose={() => setDeleteModalState((prev) => ({ ...prev, isOpen: false }))}
         onConfirm={handleExecuteDelete}
+      />
+
+      {/* Modal Konfirmasi Hapus Semua Data Dami */}
+      <ConfirmDeleteModal
+        isOpen={showPurgeModal}
+        title="Hapus Bersih Semua Data Dami Sistem"
+        category="Pembersihan Database & Cache"
+        itemName="Seluruh Data Dami / Sampel (Peserta, Lab, Radiologi, Rekanan Sampel)"
+        warningMessage="Tindakan ini akan menghapus semua peserta sampel, data pemeriksaan dami, dan cache lokal browser. Sistem MCU akan menjadi bersih dan siap untuk penginputan/impor data riil operasional."
+        onClose={() => setShowPurgeModal(false)}
+        onConfirm={handleConfirmPurgeAllDummyData}
       />
     </div>
   );

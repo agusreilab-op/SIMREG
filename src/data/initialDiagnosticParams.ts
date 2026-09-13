@@ -12,7 +12,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     pilihanOpsi: ['Normal (< 50%)', 'Kardiomegali Ringan (51 - 55%)', 'Kardiomegali Sedang-Berat (> 55%)'],
     satuan: '%',
     keterangan: 'Rasio diameter transversal jantung terhadap rongga thorax proyeksi PA',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -25,7 +25,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Normal / Kaliber Normal',
     pilihanOpsi: ['Normal / Kaliber Normal', 'Elongasi Aorta', 'Sklerosis Aorta', 'Dilatasi Aorta'],
     keterangan: 'Kondisi arkus aorta dan arkus desenden',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -38,7 +38,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Normal (Dalam Batas Normal)',
     pilihanOpsi: ['Normal (Dalam Batas Normal)', 'Meningkat di Kedua Lapang Paru', 'Kasar / Prominen'],
     keterangan: 'Percabangan vaskular bronkial bilateral',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -50,7 +50,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Tidak tampak infiltrat / Negatif',
     keterangan: 'Skrining pneumoni atau proses infeksi aktif',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -62,7 +62,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Tidak tampak kavitasi / sarang spesifik',
     keterangan: 'Skrining tuberkulosis kerja / infeksi paru spesifik',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -74,7 +74,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Tidak tampak lesi fibrosis kronis',
     keterangan: 'Skrining sequelae bekas infeksi masa lampau',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -87,7 +87,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Tajam Bilateral',
     pilihanOpsi: ['Tajam Bilateral', 'Tumpul Kanan', 'Tumpul Kiri', 'Tumpul Bilateral (Curiga Efusi)'],
     keterangan: 'Sudut kostofrenikus dan kardiofrenikus',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -100,7 +100,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Licin, Kontur Reguler Bilateral',
     pilihanOpsi: ['Licin, Kontur Reguler Bilateral', 'Elevasi Hemidiafragma Dextra', 'Elevasi Hemidiafragma Sinistra', 'Tentering / Flat'],
     keterangan: 'Morfologi kubah diafragma kanan dan kiri',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -112,7 +112,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Intak, mineralisasi baik, tidak ada fraktur',
     keterangan: 'Evaluasi costa, clavicula, scapula dan soft tissue',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -124,7 +124,7 @@ export const initialRontgenParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Cor dan Pulmo dalam Batas Normal (Foto Thorax Normal)',
     keterangan: 'Kesimpulan resmi oleh Dokter Spesialis Radiologi',
-    paketCodes: ['ALL', 'PAI-A', 'PAI-B', 'PAN-STD', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-BASIC', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
 ];
@@ -140,7 +140,7 @@ export const initialEKGParams: DiagnosticExamParam[] = [
     nilaiNormal: '60 - 100 bpm',
     satuan: 'bpm',
     keterangan: 'Laju denyut jantung istirahat 12-lead',
-    paketCodes: ['ALL', 'PAI-A', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -153,7 +153,7 @@ export const initialEKGParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Sinus Rhythm',
     pilihanOpsi: ['Sinus Rhythm', 'Sinus Bradikardia (<60 bpm)', 'Sinus Takikardia (>100 bpm)', 'Sinus Aritmia', 'Atrial Fibrilasi', 'Premature Ventricular Contraction (PVC/VES)'],
     keterangan: 'Keberadaan gelombang P diikuti kompleks QRS reguler',
-    paketCodes: ['ALL', 'PAI-A', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -166,7 +166,7 @@ export const initialEKGParams: DiagnosticExamParam[] = [
     nilaiNormal: '0.12 - 0.20 detik (120 - 200 ms)',
     satuan: 'detik',
     keterangan: 'Waktu konduksi dari nodus SA menuju nodus AV',
-    paketCodes: ['ALL', 'PAI-A', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -179,7 +179,7 @@ export const initialEKGParams: DiagnosticExamParam[] = [
     nilaiNormal: '0.06 - 0.10 detik (60 - 100 ms)',
     satuan: 'detik',
     keterangan: 'Durasi depolarisasi ventrikel',
-    paketCodes: ['ALL', 'PAI-A', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -192,7 +192,7 @@ export const initialEKGParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Normal Axis (-30° s/d +90°)',
     pilihanOpsi: ['Normal Axis (-30° s/d +90°)', 'Left Axis Deviation (LAD < -30°)', 'Right Axis Deviation (RAD > +90°)', 'Extreme Axis'],
     keterangan: 'Arah vektor depolarisasi ventrikel',
-    paketCodes: ['ALL', 'PAI-A', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -205,7 +205,7 @@ export const initialEKGParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Isoelektris (Tidak ada ST Elevasi/Depresi)',
     pilihanOpsi: ['Isoelektris', 'ST Elevasi (Curiga Infark Akut)', 'ST Depresi (Curiga Iskemik)', 'Perubahan ST Non-spesifik'],
     keterangan: 'Skrining iskemik atau jejas miokard akut',
-    paketCodes: ['ALL', 'PAI-A', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -218,7 +218,7 @@ export const initialEKGParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Normal / Positif Sesuai Sadapan',
     pilihanOpsi: ['Normal / Positif', 'Inversi T (T-Inverted)', 'T Datar (Flat T)', 'T Tinggi Simetris (Tall T)'],
     keterangan: 'Repolarisasi ventrikel',
-    paketCodes: ['ALL', 'PAI-A', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -231,7 +231,7 @@ export const initialEKGParams: DiagnosticExamParam[] = [
     nilaiNormal: '< 440 ms (Pria), < 460 ms (Wanita)',
     satuan: 'ms',
     keterangan: 'Interval QT terkoreksi frekuensi denyut jantung',
-    paketCodes: ['ALL', 'PAI-A', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -243,7 +243,7 @@ export const initialEKGParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Normal Electrocardiogram (Sinus Rhythm Normal)',
     keterangan: 'Hasil evaluasi klinis rekam elektrokardiografi',
-    paketCodes: ['ALL', 'PAI-A', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-STD', 'PAKET-EXEC'],
     isActive: true,
   },
 ];
@@ -259,7 +259,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB',
     satuan: 'dB',
     keterangan: 'Ambang dengar konduksi udara frekuensi percakapan',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -272,7 +272,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB',
     satuan: 'dB',
     keterangan: 'Ambang dengar nada murni 1 kHz',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -285,7 +285,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB',
     satuan: 'dB',
     keterangan: 'Ambang dengar nada murni 2 kHz',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -298,7 +298,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB',
     satuan: 'dB',
     keterangan: 'Frekuensi kritis penanda trauma bising okupasi',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -311,7 +311,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB',
     satuan: 'dB',
     keterangan: 'Ambang dengar nada murni telinga kiri 500 Hz',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -324,7 +324,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB',
     satuan: 'dB',
     keterangan: 'Ambang dengar nada murni telinga kiri 1 kHz',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -337,7 +337,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB',
     satuan: 'dB',
     keterangan: 'Ambang dengar nada murni telinga kiri 2 kHz',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -350,7 +350,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB',
     satuan: 'dB',
     keterangan: 'Frekuensi kritis penanda trauma bising telinga kiri',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -363,7 +363,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB (Normal Hearing)',
     satuan: 'dB',
     keterangan: 'Rata-rata ambang dengar frekuensi 500, 1000, 2000, 4000 Hz telinga kanan',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -376,7 +376,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: '≤ 25 dB (Normal Hearing)',
     satuan: 'dB',
     keterangan: 'Rata-rata ambang dengar frekuensi 500, 1000, 2000, 4000 Hz telinga kiri',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -389,7 +389,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Normal (0 - 25 dB)',
     pilihanOpsi: ['Normal (0 - 25 dB)', 'Tuli Ringan (26 - 40 dB)', 'Tuli Sedang (41 - 55 dB)', 'Tuli Sedang-Berat (56 - 70 dB)', 'Tuli Berat (71 - 90 dB)', 'Tuli Sangat Berat (> 90 dB)'],
     keterangan: 'Standar klasifikasi derajat ketulian menurut ISO/WHO',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -402,7 +402,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Normal (Tidak Ada Gangguan)',
     pilihanOpsi: ['Normal (Tidak Ada Gangguan)', 'Tuli Konduktif (CHL)', 'Tuli Sensorineural (SNHL)', 'Tuli Campuran (MHL)', 'Noise-Induced Hearing Loss (NIHL)'],
     keterangan: 'Kesesuaian Air-Bone Gap',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
   {
@@ -415,7 +415,7 @@ export const initialAudioParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Negatif (Tidak Ada Notch)',
     pilihanOpsi: ['Negatif (Tidak Ada Notch)', 'Positif Notch Kanan (Curiga NIHL)', 'Positif Notch Kiri (Curiga NIHL)', 'Positif Notch Bilateral (Curiga NIHL)'],
     keterangan: 'Evaluasi dampak pajanan bising lingkungan kerja pabrik/industri',
-    paketCodes: ['ALL', 'PAI-B', 'PAN-STD'],
+    paketCodes: ['ALL', 'PAKET-STD'],
     isActive: true,
   },
 ];
@@ -431,7 +431,7 @@ export const initialSpiroParams: DiagnosticExamParam[] = [
     nilaiNormal: '≥ 80% Nilai Prediksi',
     satuan: 'Liter',
     keterangan: 'Volume udara total yang dapat dihembuskan sekuat dan secepat mungkin',
-    paketCodes: ['ALL', 'PAI-C', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -444,7 +444,7 @@ export const initialSpiroParams: DiagnosticExamParam[] = [
     nilaiNormal: '≥ 80%',
     satuan: '%',
     keterangan: 'Persentase nilai FVC terhadap nilai acuan tinggi badan, usia, jenis kelamin',
-    paketCodes: ['ALL', 'PAI-C', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -457,7 +457,7 @@ export const initialSpiroParams: DiagnosticExamParam[] = [
     nilaiNormal: '≥ 80% Nilai Prediksi',
     satuan: 'Liter',
     keterangan: 'Volume udara yang dapat dihembuskan pada detik pertama',
-    paketCodes: ['ALL', 'PAI-C', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -470,7 +470,7 @@ export const initialSpiroParams: DiagnosticExamParam[] = [
     nilaiNormal: '≥ 80%',
     satuan: '%',
     keterangan: 'Persentase nilai FEV1 terhadap nilai prediksi populasi',
-    paketCodes: ['ALL', 'PAI-C', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -483,7 +483,7 @@ export const initialSpiroParams: DiagnosticExamParam[] = [
     nilaiNormal: '≥ 70% (Standar GOLD / ATS)',
     satuan: '%',
     keterangan: 'Penentu utama ada atau tidaknya obstruksi saluran napas',
-    paketCodes: ['ALL', 'PAI-C', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -496,7 +496,7 @@ export const initialSpiroParams: DiagnosticExamParam[] = [
     nilaiNormal: '≥ 80%',
     satuan: '%',
     keterangan: 'Kecepatan aliran udara ekspirasi puncak',
-    paketCodes: ['ALL', 'PAI-C', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -518,7 +518,7 @@ export const initialSpiroParams: DiagnosticExamParam[] = [
       'Gangguan Campuran (Restriksi dan Obstruksi)',
     ],
     keterangan: 'Klasifikasi gangguan faal paru K3 menurut ATS/ERS',
-    paketCodes: ['ALL', 'PAI-C', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
 ];
@@ -534,7 +534,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     nilaiNormal: '≥ 10 METS (Normal Exercise Capacity)',
     satuan: 'METS',
     keterangan: 'Metabolic Equivalent of Task pada protokol Bruce',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -547,7 +547,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     nilaiNormal: '≥ 85% Target Heart Rate Sesuai Usia',
     satuan: '%',
     keterangan: 'Pencapaian target denyut jantung latihan',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -559,7 +559,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Normal Normotensif (Kenaikan Fisiologis)',
     keterangan: 'Evaluasi respon tensi selama fase exercise & recovery',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -572,7 +572,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     nilaiNormal: 'Negatif (Respon Iskemik Negatif)',
     pilihanOpsi: ['Negatif (Respon Iskemik Negatif)', 'Positif Respon Iskemik (ST Depresi ≥ 1 mm)', 'Inkonklusif'],
     keterangan: 'Skrining penyakit jantung koroner dengan uji beban',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -584,7 +584,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Ukuran normal, ekogenisitas homogen, tidak tampak fatty liver / massa',
     keterangan: 'Pemeriksaan sonografi parenkim hati',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -596,7 +596,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Dinding tipis reguler, lumen anekoik bebas batu (cholelithiasis negatif)',
     keterangan: 'Skrining batu empedu dan kolesistitis',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -608,7 +608,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Ukuran dan parenkim normal, tidak tampak massa / splenomegali',
     keterangan: 'Struktur pankreas dan limpa intraabdomen',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -620,7 +620,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Bilateral ukuran normal, diferensiasi korteks-medula baik, bebas batu / hidronefrosis',
     keterangan: 'Skrining nefrolitiasis, kista, dan hidronefrosis ginjal',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -632,7 +632,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Dinding buli licin reguler bebas batu, prostat ukuran normal',
     keterangan: 'Saluran kemih bagian bawah dan kelenjar prostat',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
   {
@@ -644,7 +644,7 @@ export const initialPenunjangParams: DiagnosticExamParam[] = [
     tipeInput: 'text',
     nilaiNormal: 'Organ Intraabdomen dalam Batas Normal (Sonografi Normal)',
     keterangan: 'Resume hasil pemeriksaan USG oleh Dokter Spesialis Radiologi',
-    paketCodes: ['ALL', 'PAN-EXEC'],
+    paketCodes: ['ALL', 'PAKET-EXEC'],
     isActive: true,
   },
 ];

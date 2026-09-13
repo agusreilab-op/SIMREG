@@ -135,41 +135,38 @@ export const RegistrasiTemplateForm: React.FC<RegistrasiTemplateFormProps> = ({
   // Current active index in attendanceList
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  // Form states matching template fields
-  const [kodePt, setKodePt] = useState<string>('PAN');
-  const [namaPt, setNamaPt] = useState<string>('PT. PANARUB INDUSTRY');
-  const [wilayah, setWilayah] = useState<string>('TNG');
-  const [tglInput, setTglInput] = useState<string>('24-07-2025');
+  // Form states matching template fields (default clean/empty state)
+  const [kodePt, setKodePt] = useState<string>(companies[0]?.kode || 'UMUM');
+  const [namaPt, setNamaPt] = useState<string>(companies[0]?.nama || '');
+  const [wilayah, setWilayah] = useState<string>(companies[0]?.wilayah || '');
+  const [tglInput, setTglInput] = useState<string>(() => getFormattedNow().dateFormatted);
 
-  const [noMcu, setNoMcu] = useState<string>('118');
-  const [tglJamMcu, setTglJamMcu] = useState<string>('24-07-2025 11:18:22');
+  const [noMcu, setNoMcu] = useState<string>('');
+  const [tglJamMcu, setTglJamMcu] = useState<string>(() => getFormattedNow().full);
 
-  const [nik, setNik] = useState<string>('20100900133');
+  const [nik, setNik] = useState<string>('');
   const [noAskes, setNoAskes] = useState<string>('');
-  const [sdhMcu, setSdhMcu] = useState<boolean>(true);
+  const [sdhMcu, setSdhMcu] = useState<boolean>(false);
 
-  const [nama, setNama] = useState<string>('ABDUL ROHMAN');
+  const [nama, setNama] = useState<string>('');
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
 
-  const [tglLahir, setTglLahir] = useState<string>('1989-09-05');
+  const [tglLahir, setTglLahir] = useState<string>('1995-01-01');
   const [jk, setJk] = useState<'Pria' | 'Wanita'>('Pria');
 
-  const [dept, setDept] = useState<string>('QIP CSA & INCOMING');
-  const [bagian, setBagian] = useState<string>('QIP MIXING SL RUBBER');
-  const [jabatan, setJabatan] = useState<string>('Operator Produksi');
-  const [alamatPeserta, setAlamatPeserta] = useState<string>(
-    'Jl. Merdeka No. 45, Karawaci, Tangerang'
-  );
-  const [telp, setTelp] = useState<string>('0812-9876-1234');
+  const [dept, setDept] = useState<string>('');
+  const [bagian, setBagian] = useState<string>('');
+  const [jabatan, setJabatan] = useState<string>('');
+  const [alamatPeserta, setAlamatPeserta] = useState<string>('');
+  const [telp, setTelp] = useState<string>('');
 
-  const [paket, setPaket] = useState<string>('PAN-RO');
+  const [paket, setPaket] = useState<string>(availablePackages[0]?.kode || 'PAKET-BASIC');
   const [tidakPuasa, setTidakPuasa] = useState<boolean>(false);
-  const [keteranganPaket, setKeteranganPaket] =
-    useState<string>('Daftar, Rontgen.');
-  const [pemeriksaanTambahan, setPemeriksaanTambahan] = useState<string>('');
-  const [keteranganMcu, setKeteranganMcu] = useState<string>(
-    'Pemeriksaan rutin berkala tahunan K3.'
+  const [keteranganPaket, setKeteranganPaket] = useState<string>(
+    availablePackages[0]?.keterangan || 'Paket Pemeriksaan Standar K3'
   );
+  const [pemeriksaanTambahan, setPemeriksaanTambahan] = useState<string>('');
+  const [keteranganMcu, setKeteranganMcu] = useState<string>('');
 
   // Modals
   const [showExtraExamModal, setShowExtraExamModal] = useState<boolean>(false);
@@ -188,17 +185,17 @@ export const RegistrasiTemplateForm: React.FC<RegistrasiTemplateFormProps> = ({
 
   // Load participant data when selection changes
   const loadParticipant = (record: AttendanceRecord) => {
-    setKodePt(record.kodePt || 'PAN');
-    setNamaPt(record.pt || 'PT. PANARUB INDUSTRY');
-    setWilayah(record.wilayah || 'TNG');
-    setTglInput(record.tglInput || '24-07-2025');
+    setKodePt(record.kodePt || companies[0]?.kode || 'UMUM');
+    setNamaPt(record.pt || companies[0]?.nama || '');
+    setWilayah(record.wilayah || '');
+    setTglInput(record.tglInput || getFormattedNow().dateFormatted);
 
-    setNoMcu(record.mcuNo || '118');
+    setNoMcu(record.mcuNo || '');
     setTglJamMcu(
-      record.tglMcu ? `${record.tglMcu} ${record.jam}` : '24-07-2025 11:18:22'
+      record.tglMcu ? `${record.tglMcu} ${record.jam || ''}` : getFormattedNow().full
     );
 
-    setNik(record.nik || '20100900133');
+    setNik(record.nik || '');
     setNoAskes(record.noAskes || '');
     setSdhMcu(
       record.sudahMcu !== undefined ? record.sudahMcu : record.status === 'Hadir'
@@ -206,7 +203,7 @@ export const RegistrasiTemplateForm: React.FC<RegistrasiTemplateFormProps> = ({
 
     setNama(record.nama || '');
     setPhotoUrl(record.photoUrl || null);
-    setTglLahir(record.tglLahir || '1989-09-05');
+    setTglLahir(record.tglLahir || '1995-01-01');
     setJk(record.jk || 'Pria');
 
     setDept(record.dept || '');
@@ -215,9 +212,9 @@ export const RegistrasiTemplateForm: React.FC<RegistrasiTemplateFormProps> = ({
     setAlamatPeserta(record.alamatPeserta || '');
     setTelp(record.telp || '');
 
-    setPaket(record.kodePaket || record.paket || 'PAN-RO');
+    setPaket(record.kodePaket || record.paket || availablePackages[0]?.kode || 'PAKET-BASIC');
     setTidakPuasa(record.tidakPuasa || false);
-    setKeteranganPaket(record.keteranganPaket || 'Daftar, Rontgen.');
+    setKeteranganPaket(record.keteranganPaket || availablePackages[0]?.keterangan || '');
     setPemeriksaanTambahan(record.pemeriksaanTambahan || '');
     setKeteranganMcu(record.keteranganMcu || '');
   };
@@ -260,14 +257,6 @@ export const RegistrasiTemplateForm: React.FC<RegistrasiTemplateFormProps> = ({
     );
     if (found) {
       setKeteranganPaket(found.keterangan || found.nama);
-    } else if (val === 'PAN-RO') {
-      setKeteranganPaket('Daftar, Rontgen.');
-    } else if (val === 'PAI-A' || val === 'PAN-STD') {
-      setKeteranganPaket('Daftar, Fisik, Lab Darah Lengkap, Rontgen Thorax.');
-    } else if (val === 'PAN-EXEC') {
-      setKeteranganPaket(
-        'Daftar, Fisik, Lab Lengkap, Rontgen, EKG 12-lead, Audiometri, Spirometri.'
-      );
     } else {
       setKeteranganPaket('Daftar, Pemeriksaan Rutin K3.');
     }
@@ -672,7 +661,6 @@ export const RegistrasiTemplateForm: React.FC<RegistrasiTemplateFormProps> = ({
                           {c.kode} - {c.nama}
                         </option>
                       ))}
-                      <option value="PAN">PAN - PT. Panarub</option>
                       <option value="UMUM">UMUM - Peserta Mandiri</option>
                     </select>
                   </div>
@@ -686,7 +674,7 @@ export const RegistrasiTemplateForm: React.FC<RegistrasiTemplateFormProps> = ({
                       value={namaPt}
                       onChange={(e) => setNamaPt(e.target.value)}
                       className="w-full px-2 py-0.5 bg-white border border-slate-300 text-[11px] font-bold text-slate-800 uppercase rounded shadow-2xs focus:ring-1 focus:ring-cyan-500 focus:border-cyan-500 h-7"
-                      placeholder="PT. PANARUB INDUSTRY"
+                      placeholder="Ketik Nama Perusahaan / Instansi..."
                     />
                   </div>
 
@@ -1541,7 +1529,7 @@ export const RegistrasiTemplateForm: React.FC<RegistrasiTemplateFormProps> = ({
                         type="text"
                         value={searchNama}
                         onChange={(e) => setSearchNama(e.target.value)}
-                        placeholder="Ketik Nama Lengkap Peserta (contoh: ABDUL ROHMAN)..."
+                        placeholder="Ketik Nama Lengkap Peserta yang dicari..."
                         className="w-full pl-9 pr-8 py-2.5 bg-white border-2 border-blue-400 rounded-xl text-sm font-black text-blue-900 uppercase focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
                         autoFocus
                       />

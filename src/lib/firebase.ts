@@ -5,6 +5,7 @@ import {
   getFirestore,
   doc,
   getDocFromServer,
+  getDocs,
   collection,
   onSnapshot,
   setDoc,
@@ -449,3 +450,53 @@ export function subscribeAllExamResults(
     }
   );
 }
+
+// 11. Purge all dummy data from Cloud Firestore
+export async function clearAllDummyDataFromCloud(): Promise<void> {
+  // 1. Delete all participants
+  const partSnap = await getDocs(collection(db, 'participants'));
+  if (!partSnap.empty) {
+    const batch1 = writeBatch(db);
+    partSnap.forEach((d) => batch1.delete(d.ref));
+    await batch1.commit();
+  }
+
+  // 2. Delete all exam results
+  const examSnap = await getDocs(collection(db, 'exam_results'));
+  if (!examSnap.empty) {
+    const batch2 = writeBatch(db);
+    examSnap.forEach((d) => batch2.delete(d.ref));
+    await batch2.commit();
+  }
+
+  // 3. Delete dummy companies if any
+  const compSnap = await getDocs(collection(db, 'companies'));
+  if (!compSnap.empty) {
+    const batch3 = writeBatch(db);
+    compSnap.forEach((d) => {
+      const data = d.data();
+      if (
+        ['PAN', 'PAI', 'SMS', 'CPT'].includes(data.kode) ||
+        data.nama?.includes('PANARUB') ||
+        data.nama?.includes('Contoh')
+      ) {
+        batch3.delete(d.ref);
+      }
+    });
+    await batch3.commit();
+  }
+
+  // 4. Delete dummy packages if any
+  const pkgSnap = await getDocs(collection(db, 'packages'));
+  if (!pkgSnap.empty) {
+    const batch4 = writeBatch(db);
+    pkgSnap.forEach((d) => {
+      const data = d.data();
+      if (['PAN-RO', 'PAI-A', 'PAN-STD', 'PAN-EXEC'].includes(data.kode)) {
+        batch4.delete(d.ref);
+      }
+    });
+    await batch4.commit();
+  }
+}
+

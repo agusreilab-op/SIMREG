@@ -59,6 +59,7 @@ import { MedicalRecordView } from './components/MedicalRecordView';
 import { LaporanView, LaporanSubAction } from './components/LaporanView';
 import { LoginModal } from './components/LoginModal';
 import { Toast } from './components/Toast';
+import { purgeLocalDummyData, purgeAllDataEverywhere } from './utils/dummyDataPurge';
 
 // Helper to get initial page from URL path
 function getInitialPage(): Page {
@@ -180,41 +181,47 @@ export default function App() {
 
   // --- Real-time Firebase Synchronization & Subscriptions ---
   useEffect(() => {
+    // Purge any stale local dummy data on startup
+    purgeLocalDummyData();
+
     testConnection()
       .then((connected) => setIsCloudConnected(connected))
       .catch(() => setIsCloudConnected(false));
 
     // 1. Subscribe to Participants (Registrasi MCU)
     const unsubParticipants = subscribeParticipants((remoteList) => {
-      if (remoteList && remoteList.length > 0) {
-        setAttendanceList(remoteList);
-      } else {
-        // Seed initial attendance to cloud if remote collection is empty
-        bulkSaveParticipantsToCloud(initialAttendance).catch(console.error);
-      }
+      setAttendanceList(remoteList || []);
     });
 
     // 2. Subscribe to Packages (Paket MCU & Stiker)
     const unsubPackages = subscribePackages((remotePackages) => {
       if (remotePackages && remotePackages.length > 0) {
-        setPackages(remotePackages);
-        try {
-          localStorage.setItem('simreg_packages', JSON.stringify(remotePackages));
-          window.dispatchEvent(new Event('simreg_packages_updated'));
-        } catch {}
-      } else {
-        // Seed initial packages to cloud
-        initialPackages.forEach((p) => savePackageToCloud(p).catch(console.error));
+        // Filter out stale dummy packages
+        const cleanPackages = remotePackages.filter(
+          (p) => !['PAN-RO', 'PAI-A', 'PAN-STD', 'PAN-EXEC'].includes(p.kode)
+        );
+        if (cleanPackages.length > 0) {
+          setPackages(cleanPackages);
+          try {
+            localStorage.setItem('simreg_packages', JSON.stringify(cleanPackages));
+            window.dispatchEvent(new Event('simreg_packages_updated'));
+          } catch {}
+          return;
+        }
       }
+      setPackages(initialPackages);
     });
 
     // 3. Subscribe to Companies
     const unsubCompanies = subscribeCompanies((remoteCompanies) => {
-      if (remoteCompanies && remoteCompanies.length > 0) {
-        setCompanies(remoteCompanies);
-      } else {
-        initialCompanies.forEach((c) => saveCompanyToCloud(c).catch(console.error));
-      }
+      // Filter out stale dummy companies
+      const cleanCompanies = (remoteCompanies || []).filter(
+        (c) =>
+          !['PAN', 'PAI', 'SMS', 'CPT'].includes(c.kode) &&
+          !c.nama?.toUpperCase().includes('PANARUB') &&
+          !c.nama?.toUpperCase().includes('PRATAMA ABADI')
+      );
+      setCompanies(cleanCompanies);
     });
 
     // 4. Subscribe to Doctors
@@ -520,7 +527,7 @@ export default function App() {
     const defaultPt =
       session?.selectedPt && session.selectedPt !== 'ALL'
         ? session.selectedPt
-        : 'PT. Pratama Abadi Industri';
+        : companies[0]?.nama || 'Umum';
 
     const defaultTglMcu =
       session?.selectedPeriode && session.selectedPeriode !== 'ALL'
@@ -542,7 +549,7 @@ export default function App() {
       tglLahir: patient.tglLahir || '01/01/1990',
       pt: patient.pt || defaultPt,
       dept: patient.dept || 'Umum',
-      paket: patient.paket || 'PAI-A',
+      paket: patient.paket || packages[0]?.kode || 'PAKET-BASIC',
       tglMcu: patient.tglMcu || defaultTglMcu,
       status: patient.status || 'Hadir',
       jam:

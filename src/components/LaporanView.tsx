@@ -81,7 +81,7 @@ export const LaporanView: React.FC<LaporanViewProps> = ({
 
   // Print booklet patient selection
   const [selectedMcuNo, setSelectedMcuNo] = useState(
-    attendanceList[0]?.mcuNo || 'PAN-2025-001'
+    attendanceList[0]?.mcuNo || ''
   );
   const [showBookletModal, setShowBookletModal] = useState(false);
   const [bookletAction, setBookletAction] = useState<'preview' | 'print' | 'pdf'>('preview');
@@ -93,8 +93,14 @@ export const LaporanView: React.FC<LaporanViewProps> = ({
   // Report filters - Default to 'SEMUA' so all corporate data loads immediately!
   const [reportPt, setReportPt] = useState('SEMUA');
   const [reportDept, setReportDept] = useState('SEMUA');
-  const [reportStart, setReportStart] = useState('2025-05-01');
-  const [reportEnd, setReportEnd] = useState('2025-05-31');
+  const [reportStart, setReportStart] = useState(() => {
+    const d = new Date();
+    return `${d.getFullYear()}-01-01`;
+  });
+  const [reportEnd, setReportEnd] = useState(() => {
+    const d = new Date();
+    return d.toISOString().split('T')[0];
+  });
   const [reportSearch, setReportSearch] = useState('');
 
   // Dynamically derive departments from attendanceList
